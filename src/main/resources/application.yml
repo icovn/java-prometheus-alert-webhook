@@ -1,0 +1,15 @@
+server:
+  port: ${OPEN_PORT}
+
+application:
+  private:
+    enabled: ${APPLICATION_PRIVATE_ENABLED}
+    ips:
+      - ${APPLICATION_PRIVATE_IP_1}
+      - ${APPLICATION_PRIVATE_IP_2}
+      - ${APPLICATION_PRIVATE_IP_3}
+
+  sms:
+    url: ${SMS_URL}
+    username: ${SMS_USERNAME}
+    password: ${SMS_PASSWORD}

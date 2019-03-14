@@ -1,0 +1,6 @@
+application:
+  private:
+    enabled: true
+    ips:
+      - 10.0.1
+      - 10.0.2
