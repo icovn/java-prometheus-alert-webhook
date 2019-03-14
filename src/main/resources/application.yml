@@ -13,3 +13,4 @@ application:
     url: ${SMS_URL}
     username: ${SMS_USERNAME}
     password: ${SMS_PASSWORD}
+    brand: ${SMS_BRAND}
