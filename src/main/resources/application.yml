@@ -8,6 +8,27 @@ application:
       - ${APPLICATION_PRIVATE_IP_1}
       - ${APPLICATION_PRIVATE_IP_2}
       - ${APPLICATION_PRIVATE_IP_3}
+    users:
+      - username: ${USERNAME_1}
+        phone: ${PHONE_1}
+      - username: ${USERNAME_2}
+        phone: ${PHONE_2}
+      - username: ${USERNAME_3}
+        phone: ${PHONE_3}
+      - username: ${USERNAME_4}
+        phone: ${PHONE_4}
+      - username: ${USERNAME_5}
+        phone: ${PHONE_5}
+      - username: ${USERNAME_6}
+        phone: ${PHONE_6}
+      - username: ${USERNAME_7}
+        phone: ${PHONE_7}
+      - username: ${USERNAME_8}
+        phone: ${PHONE_8}
+      - username: ${USERNAME_9}
+        phone: ${PHONE_9}
+      - username: ${USERNAME_10}
+        phone: ${PHONE_10}
 
   sms:
     url: ${SMS_URL}

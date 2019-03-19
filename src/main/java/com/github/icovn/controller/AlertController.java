@@ -2,7 +2,8 @@ package com.github.icovn.controller;
 
 import com.github.icovn.modal.Alert;
 import com.github.icovn.modal.Alerts;
-import com.github.icovn.config.PrivateIpConfig;
+import com.github.icovn.config.ApplicationConfig;
+import com.github.icovn.modal.User;
 import com.github.icovn.service.SmsService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,15 +19,15 @@ public class AlertController extends BaseController {
   @Value("${application.private.enabled}")
   private boolean privateEnabled;
 
-  private final PrivateIpConfig privateIpConfig;
+  private final ApplicationConfig applicationConfig;
   private final SmsService smsService;
 
   @Autowired
   public AlertController(
-      PrivateIpConfig privateIpConfig,
+      ApplicationConfig applicationConfig,
       SmsService smsService
   ) {
-    this.privateIpConfig = privateIpConfig;
+    this.applicationConfig = applicationConfig;
     this.smsService = smsService;
   }
 
@@ -35,26 +36,37 @@ public class AlertController extends BaseController {
     if(isValidRequest()){
       log.info("(sms)alerts: {}", alerts);
       for(Alert alert:alerts.getAlerts()){
-        String sms = "";
-        if(alert.getStatus().equals("firing")){
-          sms += "*TOPKID - Alerts Firing:*\n";
-        }else {
-          sms += "*TOPKID - Alerts Resolved:*\n";
+        for(User user: applicationConfig.getUsers()){
+          if(!user.getPhone().isEmpty()){
+            smsService.sendSms(user.getPhone(), getSmsContent(alert));
+          }else {
+            log.warn("(sms)alerts: {}, user:", alerts, user);
+          }
         }
-        sms += alert.getLabels().get("instance") + ": " + alert.getAnnotations().get("description")+ "\n";
-        if(alert.getStartsAt() != null){
-          sms += "start at: " + alert.getStartsAt() + "\n";
-        }
-        smsService.sendSms(alerts.getReceiver(), sms);
       }
     }else {
       log.warn("(sms)alerts: {}", alerts);
     }
   }
 
+  private String getSmsContent(Alert alert){
+    String sms = "";
+    if(alert.getStatus().equals("firing")){
+      sms += "*TOPKID - Alerts Firing:*\n";
+    }else {
+      sms += "*TOPKID - Alerts Resolved:*\n";
+    }
+    sms += alert.getLabels().get("instance") + ": " + alert.getAnnotations().get("description")+ "\n";
+    if(alert.getStartsAt() != null){
+      sms += "start at: " + alert.getStartsAt() + "\n";
+    }
+
+    return sms;
+  }
+
   private boolean isValidRequest(){
     if(privateEnabled){
-      return privateIpConfig.isInWhiteListIp(getIp());
+      return applicationConfig.isInWhiteListIp(getIp());
     }
 
     return true;
