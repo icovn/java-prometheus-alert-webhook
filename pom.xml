@@ -26,6 +26,11 @@
       <artifactId>util</artifactId>
       <version>${icovn-util-version}</version>
     </dependency>
+    <dependency>
+      <groupId>vn.edu.topica.common.service</groupId>
+      <artifactId>sdk-java</artifactId>
+      <version>1.1-SNAPSHOT</version>
+    </dependency>
 
     <dependency>
       <groupId>org.projectlombok</groupId>
@@ -58,92 +63,6 @@
     <icovn-http-client-version>1.7.9-RELEASE</icovn-http-client-version>
   </properties>
 
-  <profiles>
-    <profile>
-      <id>docker</id>
-      <activation>
-        <activeByDefault>false</activeByDefault>
-      </activation>
-      <build>
-        <plugins>
-          <plugin>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-maven-plugin</artifactId>
-          </plugin>
-        </plugins>
-      </build>
-    </profile>
-
-    <profile>
-      <id>local</id>
-      <activation>
-        <activeByDefault>true</activeByDefault>
-      </activation>
-      <build>
-        <plugins>
-          <plugin>
-            <groupId>org.codehaus.mojo</groupId>
-            <artifactId>appassembler-maven-plugin</artifactId>
-            <version>1.10</version>
-            <executions>
-              <execution>
-                <id>generate-jsw-scripts</id>
-                <phase>package</phase>
-                <goals>
-                  <goal>generate-daemons</goal>
-                </goals>
-                <configuration>
-                  <repositoryLayout>flat</repositoryLayout>
-                  <target>${project.build.directory}</target>
-                  <daemons>
-                    <daemon>
-                      <id>app</id>
-                      <mainClass>${project.groupId}.Application
-                      </mainClass>
-                      <commandLineArguments>
-                        <commandLineArgument>start</commandLineArgument>
-                      </commandLineArguments>
-                      <platforms>
-                        <platform>jsw</platform>
-                      </platforms>
-                      <generatorConfigurations>
-                        <generatorConfiguration>
-                          <generator>jsw</generator>
-                          <includes>
-                            <include>linux-x86-64</include>
-                          </includes>
-                          <configuration>
-                            <property>
-                              <name>wrapper.logfile</name>
-                              <value>logs/wrapper-YYYYMMDD.log</value>
-                            </property>
-                            <property>
-                              <name>wrapper.logfile.rollmode</name>
-                              <value>DATE</value>
-                            </property>
-                          </configuration>
-                        </generatorConfiguration>
-                      </generatorConfigurations>
-                      <jvmSettings>
-                        <initialMemorySize>128M</initialMemorySize>
-                        <maxMemorySize>256M</maxMemorySize>
-                        <systemProperties>
-                        </systemProperties>
-                        <extraArguments>
-                          <extraArgument>-Dspring.profiles.active=local,production</extraArgument>
-                        </extraArguments>
-                      </jvmSettings>
-                    </daemon>
-                  </daemons>
-                </configuration>
-              </execution>
-            </executions>
-          </plugin>
-        </plugins>
-      </build>
-    </profile>
-  </profiles>
-
   <build>
     <plugins>
       <plugin>
@@ -151,6 +70,7 @@
         <artifactId>spring-boot-maven-plugin</artifactId>
       </plugin>
     </plugins>
+    <finalName>${project.artifactId}</finalName>
   </build>
 
   <repositories>
@@ -161,6 +81,23 @@
       <id>bintray-icovn-maven-repository</id>
       <name>bintray</name>
       <url>https://dl.bintray.com/icovn/maven-repository</url>
+    </repository>
+
+    <repository>
+      <id>topkid-snapshots</id>
+      <name>Topkid Snapshots</name>
+      <url>https://registry.topica.vn/repository/topkid-maven-snapshot</url>
+      <snapshots>
+        <enabled>true</enabled>
+      </snapshots>
+    </repository>
+    <repository>
+      <id>topkid-releases</id>
+      <name>Topkid Releases</name>
+      <url>https://registry.topica.vn/repository/topkid-maven-release</url>
+      <snapshots>
+        <enabled>false</enabled>
+      </snapshots>
     </repository>
   </repositories>
 </project>

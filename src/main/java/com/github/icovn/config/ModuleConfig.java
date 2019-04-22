@@ -2,7 +2,7 @@ package com.github.icovn.config;
 
 import com.github.icovn.service.SmsService;
 import com.github.icovn.service.SmsServiceSimpleImpl;
-import com.github.icovn.service.SmsServiceVietnamImpl;
+import com.github.icovn.service.SmsServiceTopicaImpl;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -16,7 +16,7 @@ public class ModuleConfig {
   @Bean
   public SmsService smsService(){
     if(privateEnabled){
-      return new SmsServiceVietnamImpl();
+      return new SmsServiceTopicaImpl();
     }
 
     return new SmsServiceSimpleImpl();

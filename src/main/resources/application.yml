@@ -35,3 +35,8 @@ application:
     username: ${SMS_USERNAME}
     password: ${SMS_PASSWORD}
     brand: ${SMS_BRAND}
+
+  service:
+    sms:
+      appName: ${SMS_APP_NAME}
+      secretKey: ${SMS_SECRET_KEY}

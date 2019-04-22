@@ -1,5 +1,0 @@
-FROM docker.topica.vn/icovn-prometheus-alert-webhook:1.0-SNAPSHOT
-RUN rm -rf /tmp/source/*
-ADD	./ /tmp/source
-RUN	cd /tmp/source && mvn package -Pdocker -Dmaven.test.skip
-ENTRYPOINT ["java","-Djava.security.egd=file:/dev/./urandom", "-jar","/tmp/source/target/prometheus-alert-webhook-1.0-SNAPSHOT.jar"]
