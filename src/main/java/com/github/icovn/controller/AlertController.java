@@ -45,7 +45,7 @@ public class AlertController extends BaseController {
         }
       }
     }else {
-      log.warn("(sms)alerts: {}", alerts);
+      log.warn("(sms)INVALID_REQUEST|ip: {}, alerts: {}", getIp(), alerts);
     }
   }
 
