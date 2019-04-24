@@ -17,7 +17,7 @@ public class SmsServiceTopicaImpl implements SmsService {
 
   @Override
   public void sendSms(String phone, String content) {
-    log.info("(sendSms)phone: {}, content: {}", phone, content);
+    log.debug("(sendSms)phone: {}, content: {}", phone, content);
 
     try {
       SmsClient smsClient = new SmsClient(appName, secretKey);

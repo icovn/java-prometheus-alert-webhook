@@ -34,13 +34,13 @@ public class AlertController extends BaseController {
   @PostMapping("/alert/sms")
   public void sms(@RequestBody Alerts alerts){
     if(isValidRequest()){
-      log.info("(sms)alerts: {}", alerts);
+      log.info("(sms)VALID_REQUEST|ip: {}, alerts: {}", getIp(), alerts);
       for(Alert alert:alerts.getAlerts()){
         for(User user: applicationConfig.getUsers()){
           if(!user.getPhone().isEmpty()){
             smsService.sendSms(user.getPhone(), getSmsContent(alert));
           }else {
-            log.warn("(sms)alerts: {}, user:", alerts, user);
+            log.warn("(sms)EMPTY_USER|user: {}, alerts: {}", user, alerts);
           }
         }
       }

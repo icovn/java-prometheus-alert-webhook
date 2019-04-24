@@ -29,7 +29,7 @@ public class SmsServiceVietnamImpl implements SmsService {
 
   @Override
   public void sendSms(String phone, String content) {
-    log.info("(sendSms)phone: {}, content: {}", phone, content);
+    log.debug("(sendSms)phone: {}, content: {}", phone, content);
 
     Map<String, String> headers = new HashMap<>();
     headers.put("Content-Type", "application/json");
