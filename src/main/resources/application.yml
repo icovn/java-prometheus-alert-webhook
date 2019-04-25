@@ -8,6 +8,8 @@ application:
       - ${APPLICATION_PRIVATE_IP_1}
       - ${APPLICATION_PRIVATE_IP_2}
       - ${APPLICATION_PRIVATE_IP_3}
+      - ${APPLICATION_PRIVATE_IP_4}
+      - ${APPLICATION_PRIVATE_IP_5}
     users:
       - username: ${USERNAME_1}
         phone: ${PHONE_1}
