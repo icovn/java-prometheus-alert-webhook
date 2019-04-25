@@ -4,6 +4,7 @@ import com.github.icovn.util.ExceptionUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import vn.edu.topica.sdk.client.SmsClient;
+import vn.edu.topica.sdk.constant.SmsBrand;
 import vn.edu.topica.sdk.util.SmsUtil;
 
 @Slf4j
@@ -21,7 +22,7 @@ public class SmsServiceTopicaImpl implements SmsService {
 
     try {
       SmsClient smsClient = new SmsClient(appName, secretKey);
-      smsClient.send(SmsUtil.removeAccent(content), phone);
+      smsClient.send(SmsUtil.removeAccent(content), phone, SmsBrand.KIDTOPI);
     }catch (Exception ex){
       log.error("(sendSms)phone: {}ex: {}", phone, ExceptionUtil.getFullStackTrace(ex, true));
     }
