@@ -9,6 +9,7 @@ import java.util.HashMap;
 import java.util.Map;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
+import vn.edu.topica.sdk.constant.SmsBrand;
 
 @Slf4j
 public class SmsServiceVietnamImpl implements SmsService {
@@ -31,6 +32,13 @@ public class SmsServiceVietnamImpl implements SmsService {
   public void sendSms(String phone, String content) {
     log.debug("(sendSms)phone: {}, content: {}", phone, content);
 
+    sendSms(phone, content, SmsBrand.DEFAULT);
+  }
+
+  @Override
+  public void sendSms(String phone, String content, SmsBrand brand) {
+    log.debug("(sendSms)phone: {}, content: {}, brand: {}", phone, content, brand);
+
     Map<String, String> headers = new HashMap<>();
     headers.put("Content-Type", "application/json");
 
@@ -45,6 +53,6 @@ public class SmsServiceVietnamImpl implements SmsService {
     params.put("sendTime", "");
 
     HttpResult result = httpClient.post(url, headers, MapperUtil.toJson(params));
-    log.info("(sendSms)phone: {}, content: {}, result: {}", phone, content, result);
+    log.info("(sendSms)phone: {}, brand: {}, result: {}", phone, brand, result);
   }
 }

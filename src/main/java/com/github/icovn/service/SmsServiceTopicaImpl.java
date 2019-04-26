@@ -20,11 +20,17 @@ public class SmsServiceTopicaImpl implements SmsService {
   public void sendSms(String phone, String content) {
     log.debug("(sendSms)phone: {}, content: {}", phone, content);
 
+    sendSms(phone, content, SmsBrand.DEFAULT);
+  }
+
+  @Override
+  public void sendSms(String phone, String content, SmsBrand brand) {
+    log.debug("(sendSms)phone: {}, content: {}, brand: {}", phone, content, brand);
     try {
       SmsClient smsClient = new SmsClient(appName, secretKey);
-      smsClient.send(SmsUtil.removeAccent(content), phone, SmsBrand.KIDTOPI);
+      smsClient.send(SmsUtil.removeAccent(content), phone, brand);
     }catch (Exception ex){
-      log.error("(sendSms)phone: {}ex: {}", phone, ExceptionUtil.getFullStackTrace(ex, true));
+      log.error("(sendSms)phone: {}, ex: {}", phone, ExceptionUtil.getFullStackTrace(ex, true));
     }
   }
 }
