@@ -79,6 +79,9 @@ public class AlertController extends BaseController {
         sms += "- START AT: " + alert.getStartsAt() + "\n";
       }
     }else {
+      if(alert.getAnnotations().get("summary") != null){
+        sms += "- SUMMARY: " + alert.getAnnotations().get("summary") + "\n";
+      }
       if(alert.getStartsAt() != null){
         sms += "- START AT: " + alert.getStartsAt() + "\n";
       }
