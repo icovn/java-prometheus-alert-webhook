@@ -58,21 +58,36 @@ public class AlertController extends BaseController {
   }
 
   private String getSmsContent(Alert alert, boolean isDev){
-    String prefix = "*TOPKID";
-    if(isDev){
-      prefix = "*TOPKID-DEV";
+    String prefix = "*" + alert.getLabels().get("alertname");
+
+    if(prefix == null){
+      prefix = "*TOPKID";
+      if(isDev){
+        prefix = "*TOPKID-DEV";
+      }
     }
 
-    String sms = "";
+    String sms = prefix + " (" + alert.getStatus().toUpperCase() + "):*\n";
     if(alert.getStatus().equals("firing")){
-      sms += prefix + " - Alerts Firing:*\n";
+      String description = alert.getAnnotations().get("description");
+      if(description == null){
+        description = alert.getAnnotations().get("descriptions");
+      }
+
+      sms += "- DESCRIPTION: " + description+ "\n";
+      if(alert.getStartsAt() != null){
+        sms += "- START AT: " + alert.getStartsAt() + "\n";
+      }
     }else {
-      sms += prefix + " - Alerts Resolved:*\n";
+      if(alert.getStartsAt() != null){
+        sms += "- START AT: " + alert.getStartsAt() + "\n";
+      }
+      if(alert.getEndsAt() != null){
+        sms += "- END AT: " + alert.getEndsAt() + "\n";
+      }
     }
-    sms += alert.getLabels().get("instance") + ": " + alert.getAnnotations().get("description")+ "\n";
-    if(alert.getStartsAt() != null){
-      sms += "start at: " + alert.getStartsAt() + "\n";
-    }
+
+
 
     return sms;
   }
