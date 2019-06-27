@@ -5,6 +5,8 @@ import com.github.icovn.modal.Alerts;
 import com.github.icovn.config.ApplicationConfig;
 import com.github.icovn.modal.User;
 import com.github.icovn.service.SmsService;
+import com.github.icovn.util.DateUtil;
+import java.util.Date;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -77,6 +79,7 @@ public class AlertController extends BaseController {
       sms += "- DESCRIPTION: " + description+ "\n";
       if(alert.getStartsAt() != null){
         sms += "- START AT: " + alert.getStartsAt() + "\n";
+        sms += "- SEND ALERT AT: " + DateUtil.toString(new Date(), "yyyy-MM-dd HH:mm:ss") + "\n";
       }
     }else {
       if(alert.getAnnotations().get("summary") != null){
@@ -89,8 +92,6 @@ public class AlertController extends BaseController {
         sms += "- END AT: " + alert.getEndsAt() + "\n";
       }
     }
-
-
 
     return sms;
   }
