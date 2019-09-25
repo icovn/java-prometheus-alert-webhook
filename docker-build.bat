@@ -1,8 +1,2 @@
-#login
-#docker login docker.topica.vn -u username -p password
-
-#build inheritance
-docker build -f Dockerfile -t docker.topica.vn/icovn-prometheus-alert-webhook:1.0.24-SNAPSHOT .
-
-#push
-docker push docker.topica.vn/icovn-prometheus-alert-webhook:1.0.24-SNAPSHOT
+docker build -f Dockerfile -t topkiddocker.topica.vn/icovn-prometheus-alert-webhook:2.0.2-SNAPSHOT .
+docker push topkiddocker.topica.vn/icovn-prometheus-alert-webhook:2.0.2-SNAPSHOT

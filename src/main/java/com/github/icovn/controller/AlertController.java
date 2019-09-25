@@ -41,13 +41,13 @@ public class AlertController extends BaseController {
     if(isValidRequest()){
       log.info("(sms)VALID_REQUEST|ip: {}, alerts: {}", ip, alerts);
       for(Alert alert:alerts.getAlerts()){
-        for(User user: applicationConfig.getUsers()){
+        for(User user: applicationConfig.getUsers(alerts.getReceiver())){
           if(!user.getPhone().isEmpty()){
             if(ip.startsWith("10.0")){
               //production
-              smsService.sendSms(user.getPhone(), getSmsContent(alert, false), SmsBrand.TOPICA);
+              smsService.sendSms(user.getPhone(), getSmsContent(alert, alerts.getReceiver()), SmsBrand.TOPICA);
             }else {
-              smsService.sendSms(user.getPhone(), getSmsContent(alert, true), SmsBrand.KIDTOPI);
+              smsService.sendSms(user.getPhone(), getSmsContent(alert, alerts.getReceiver()), SmsBrand.KIDTOPI);
             }
           }else {
             log.warn("(sms)EMPTY_USER|user: {}, alerts: {}", user, alerts);
@@ -59,14 +59,11 @@ public class AlertController extends BaseController {
     }
   }
 
-  private String getSmsContent(Alert alert, boolean isDev){
+  private String getSmsContent(Alert alert, String groupId){
     String prefix = "*" + alert.getLabels().get("alertname");
 
     if(prefix == null){
-      prefix = "*TOPKID";
-      if(isDev){
-        prefix = "*TOPKID-DEV";
-      }
+      prefix = "*" + groupId;
     }
 
     String sms = prefix + " (" + alert.getStatus().toUpperCase() + "):*\n";
