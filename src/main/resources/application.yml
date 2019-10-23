@@ -23,6 +23,12 @@ application:
             phone: ${TEAM1_PHONE4}
           - username: ${TEAM1_USER5}
             phone: ${TEAM1_PHONE5}
+          - username: ${TEAM1_USER6}
+            phone: ${TEAM1_PHONE6}
+          - username: ${TEAM1_USER7}
+            phone: ${TEAM1_PHONE7}
+          - username: ${TEAM1_USER8}
+            phone: ${TEAM1_PHONE8}
       - id: ${TEAM2} #team-cc19-r
         users:
           - username: ${TEAM2_USER1}
