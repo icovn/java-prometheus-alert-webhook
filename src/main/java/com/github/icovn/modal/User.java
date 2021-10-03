@@ -5,6 +5,6 @@ import lombok.Data;
 @Data
 public class User {
 
-  private String phone;
+  private String alertId;
   private String username;
 }

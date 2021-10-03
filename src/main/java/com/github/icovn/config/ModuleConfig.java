@@ -1,24 +1,15 @@
 package com.github.icovn.config;
 
-import com.github.icovn.service.SmsService;
-import com.github.icovn.service.SmsServiceSimpleImpl;
-import com.github.icovn.service.SmsServiceTopicaImpl;
-import org.springframework.beans.factory.annotation.Value;
+import com.github.icovn.service.AlertService;
+import com.github.icovn.service.AlertServiceSkypeImpl;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
 public class ModuleConfig {
 
-  @Value("${application.private.enabled}")
-  private boolean privateEnabled;
-
   @Bean
-  public SmsService smsService(){
-    if(privateEnabled){
-      return new SmsServiceTopicaImpl();
-    }
-
-    return new SmsServiceSimpleImpl();
+  public AlertService alertService(ApplicationSkypeConfig applicationSkypeConfig){
+    return new AlertServiceSkypeImpl(applicationSkypeConfig);
   }
 }

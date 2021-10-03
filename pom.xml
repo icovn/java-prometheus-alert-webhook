@@ -8,59 +8,69 @@
   <artifactId>prometheus-alert-webhook</artifactId>
   <version>1.0-SNAPSHOT</version>
 
-  <parent>
-    <groupId>org.springframework.boot</groupId>
-    <artifactId>spring-boot-starter-parent</artifactId>
-    <version>2.1.2.RELEASE</version>
-    <relativePath/> <!-- lookup parent from repository -->
-  </parent>
-
   <dependencies>
+    <!--COMMON-->
     <dependency>
+      <artifactId>icovn-common-http</artifactId>
       <groupId>com.github.icovn</groupId>
-      <artifactId>http-client</artifactId>
-      <version>${icovn-http-client-version}</version>
     </dependency>
     <dependency>
+      <artifactId>icovn-common-util</artifactId>
       <groupId>com.github.icovn</groupId>
-      <artifactId>util</artifactId>
-      <version>${icovn-util-version}</version>
-    </dependency>
-    <dependency>
-      <groupId>vn.edu.topica.common.service</groupId>
-      <artifactId>sdk-java</artifactId>
-      <version>2.0.1-RELEASE</version>
     </dependency>
 
-    <dependency>
-      <groupId>org.projectlombok</groupId>
-      <artifactId>lombok</artifactId>
-    </dependency>
-
+    <!--COMMON SPRING-->
     <dependency>
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-web</artifactId>
     </dependency>
-
+    <dependency>
+      <artifactId>lombok</artifactId>
+      <groupId>org.projectlombok</groupId>
+    </dependency>
     <dependency>
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-devtools</artifactId>
       <optional>true</optional>
     </dependency>
-
     <dependency>
-      <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-test</artifactId>
+      <groupId>org.springframework.boot</groupId>
       <scope>test</scope>
     </dependency>
   </dependencies>
+  
+  <dependencyManagement>
+    <dependencies>
+      <!--COMMON-->
+      <dependency>
+        <artifactId>icovn-common-http</artifactId>
+        <groupId>com.github.icovn</groupId>
+        <version>${icovn.java.common.version}</version>
+      </dependency>
+      <dependency>
+        <artifactId>icovn-common-util</artifactId>
+        <groupId>com.github.icovn</groupId>
+        <version>${icovn.java.common.version}</version>
+      </dependency>
+      
+      <!--COMMON SPRING-->
+      <dependency>
+        <artifactId>spring-boot-dependencies</artifactId>
+        <groupId>org.springframework.boot</groupId>
+        <scope>import</scope>
+        <type>pom</type>
+        <version>${spring.boot.version}</version>
+      </dependency>
+    </dependencies>
+  </dependencyManagement>
 
   <properties>
     <java.version>1.8</java.version>
     <maven.compiler.source>1.8</maven.compiler.source>
     <maven.compiler.target>1.8</maven.compiler.target>
-    <icovn-util-version>2.27-RELEASE</icovn-util-version>
-    <icovn-http-client-version>1.7.9-RELEASE</icovn-http-client-version>
+    <icovn.java.common.version>3.1.27-RELEASE</icovn.java.common.version>
+    <spring.boot.version>2.4.3</spring.boot.version>
   </properties>
 
   <build>
@@ -75,29 +85,21 @@
 
   <repositories>
     <repository>
-      <snapshots>
-        <enabled>false</enabled>
-      </snapshots>
-      <id>bintray-icovn-maven-repository</id>
-      <name>bintray</name>
-      <url>https://dl.bintray.com/icovn/maven-repository</url>
+      <id>maven-central</id>
+      <url>https://repo1.maven.org/maven2/</url>
     </repository>
-
     <repository>
-      <id>topkid-snapshots</id>
-      <name>Topkid Snapshots</name>
-      <url>https://registry.topica.vn/repository/topkid-maven-snapshot</url>
+      <id>github-educa-DEV</id>
+      <name>github-educa-DEV</name>
+      <releases>
+        <enabled>true</enabled>
+        <updatePolicy>always</updatePolicy>
+      </releases>
       <snapshots>
         <enabled>true</enabled>
+        <updatePolicy>always</updatePolicy>
       </snapshots>
-    </repository>
-    <repository>
-      <id>topkid-releases</id>
-      <name>Topkid Releases</name>
-      <url>https://registry.topica.vn/repository/topkid-maven-release</url>
-      <snapshots>
-        <enabled>false</enabled>
-      </snapshots>
+      <url>https://maven.pkg.github.com/icovn/*</url>
     </repository>
   </repositories>
 </project>

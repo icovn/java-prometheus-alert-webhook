@@ -4,10 +4,8 @@
 
 #Test
 curl -X POST \
-  https://DOMAIN_XXX/alert/sms \
+  https://DOMAIN_XXX/alert \
   -H 'Content-Type: application/json' \
-  -H 'Postman-Token: f649494b-d242-4675-9974-c6566d94ccbd' \
-  -H 'cache-control: no-cache' \
   -d '{
    "receiver":"team-sms",
    "status":"firing",

@@ -1,54 +1,10 @@
-server:
-  port: ${OPEN_PORT}
-
 application:
   private:
-    enabled: ${APPLICATION_PRIVATE_ENABLED}
+    enabled: true
     ips:
+      - 127.0.0.1
       - ${APPLICATION_PRIVATE_IP_1}
       - ${APPLICATION_PRIVATE_IP_2}
       - ${APPLICATION_PRIVATE_IP_3}
       - ${APPLICATION_PRIVATE_IP_4}
       - ${APPLICATION_PRIVATE_IP_5}
-    groups:
-      - id: ${TEAM1} #team-sms
-        users:
-          - username: ${TEAM1_USER1}
-            phone: ${TEAM1_PHONE1}
-          - username: ${TEAM1_USER2}
-            phone: ${TEAM1_PHONE2}
-          - username: ${TEAM1_USER3}
-            phone: ${TEAM1_PHONE3}
-          - username: ${TEAM1_USER4}
-            phone: ${TEAM1_PHONE4}
-          - username: ${TEAM1_USER5}
-            phone: ${TEAM1_PHONE5}
-          - username: ${TEAM1_USER6}
-            phone: ${TEAM1_PHONE6}
-          - username: ${TEAM1_USER7}
-            phone: ${TEAM1_PHONE7}
-          - username: ${TEAM1_USER8}
-            phone: ${TEAM1_PHONE8}
-      - id: ${TEAM2} #team-cc19-r
-        users:
-          - username: ${TEAM2_USER1}
-            phone: ${TEAM2_PHONE1}
-          - username: ${TEAM2_USER2}
-            phone: ${TEAM2_PHONE2}
-          - username: ${TEAM2_USER3}
-            phone: ${TEAM2_PHONE3}
-          - username: ${TEAM2_USER4}
-            phone: ${TEAM2_PHONE4}
-          - username: ${TEAM2_USER5}
-            phone: ${TEAM2_PHONE5}
-
-  sms:
-    url: ${SMS_URL}
-    username: ${SMS_USERNAME}
-    password: ${SMS_PASSWORD}
-    brand: ${SMS_BRAND}
-
-  service:
-    sms:
-      appName: ${SMS_APP_NAME}
-      secretKey: ${SMS_SECRET_KEY}

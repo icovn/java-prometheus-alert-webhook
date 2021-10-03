@@ -6,10 +6,10 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
 @Slf4j
-public class Application {
+public class AlertWebhookApplication {
 
   public static void main(String[] args) {
     log.info("Start Application");
-    SpringApplication.run(Application.class, args);
+    SpringApplication.run(AlertWebhookApplication.class, args);
   }
 }

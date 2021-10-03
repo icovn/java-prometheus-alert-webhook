@@ -1,0 +1,14 @@
+application:
+  groups:
+    - id: ${TEAM1} #team-1
+      users:
+        - username: ${TEAM1_USER_1}
+          alertId: ${TEAM1_ALERT_ID_1}
+        - username: ${TEAM1_USER_2}
+          alertId: ${TEAM1_ALERT_ID_2}
+    - id: ${TEAM2} #team-2
+      users:
+        - username: ${TEAM2_USER_1}
+          alertId: ${TEAM2_ALERT_ID_1}
+        - username: ${TEAM2_USER_2}
+          alertId: ${TEAM2_ALERT_ID_2}
